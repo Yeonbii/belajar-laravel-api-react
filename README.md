@@ -18,10 +18,10 @@ Status:
 
 Conventional Commits — formatnya `type: pesan`
 
-`chore` → setup, konfigurasi, hal non-fitur
-`feat` → fitur baru
-`fix` → perbaikan bug
-`test` → menambah/mengubah test
-`refactor` → perubahan kode tanpa mengubah fungsi
-`docs` → perubahan dokumentasi (README, komentar, dsb)
-`style` → formatting, spasi, titik koma — bukan CSS
+- `chore` → setup, konfigurasi, hal non-fitur
+- `feat` → fitur baru
+- `fix` → perbaikan bug
+- `test` → menambah/mengubah test
+- `refactor` → perubahan kode tanpa mengubah fungsi
+- `docs` → perubahan dokumentasi (README, komentar, dsb)
+- `style` → formatting, spasi, titik koma — bukan CSS
