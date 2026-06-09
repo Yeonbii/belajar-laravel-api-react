@@ -47,7 +47,7 @@ test('user can logout', function () {
                      ->postJson('/api/logout');
 
     $response->assertStatus(200)
-             ->assertJson(['message' => 'Logged out successfully']);
+             ->assertJson(['message' => 'Logout berhasil']);
 });
 
 test('unauthenticated user cannot logout', function () {
