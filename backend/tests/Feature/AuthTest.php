@@ -55,3 +55,53 @@ test('unauthenticated user cannot logout', function () {
 
     $response->assertStatus(401);
 });
+
+test('register fails if fields are empty', function () {
+    $response = $this->postJson('/api/register', []);
+
+    $response->assertStatus(422);
+});
+
+test('register fails if email already taken', function () {
+    User::factory()->create(['email' => 'test@example.com']);
+
+    $response = $this->postJson('/api/register', [
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    $response->assertStatus(422);
+});
+
+test('register fails if password confirmation does not match', function () {
+    $response = $this->postJson('/api/register', [
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'wrongpassword',
+    ]);
+
+    $response->assertStatus(422);
+});
+
+test('login fails if email not registered', function () {
+    $response = $this->postJson('/api/login', [
+        'email' => 'notexist@example.com',
+        'password' => 'password',
+    ]);
+
+    $response->assertStatus(422);
+});
+
+test('login fails if password is wrong', function () {
+    User::factory()->create(['email' => 'test@example.com']);
+
+    $response = $this->postJson('/api/login', [
+        'email' => 'test@example.com',
+        'password' => 'wrongpassword',
+    ]);
+
+    $response->assertStatus(422);
+});
