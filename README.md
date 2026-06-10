@@ -16,7 +16,7 @@ Status:
 
 ## Note
 
-Alur Pengerjaan (GitHub Flow)
+### Alur Pengerjaan (GitHub Flow)
 
 1. **Buat Issue** di GitHub — deskripsikan apa yang akan dikerjakan
 2. **Buat branch** dari `main`
@@ -54,3 +54,33 @@ Conventional Commits — formatnya `type: pesan`
 - `refactor` → perubahan kode tanpa mengubah fungsi
 - `docs` → perubahan dokumentasi (README, komentar, dsb)
 - `style` → formatting, spasi, titik koma — bukan CSS
+
+
+## Panduan Feature Testing
+
+Setiap fitur idealnya memiliki dua jenis test:
+
+### Positive Test
+Memastikan fitur berjalan dengan benar saat input valid.
+- Endpoint mengembalikan status yang benar (200, 201, dll)
+- Response memiliki struktur JSON yang diharapkan
+- Data tersimpan/berubah di database
+
+### Negative Test
+Memastikan sistem menolak dengan benar saat input tidak valid.
+- Field kosong → 422 (Unprocessable Entity)
+- Data duplikat (email sudah terdaftar) → 422
+- Data tidak ditemukan → 404
+- Belum login tapi akses endpoint protected → 401
+- Login tapi tidak punya akses → 403
+
+### HTTP Status Code yang umum dipakai
+| Kode | Arti | Kapan dipakai |
+|---|---|---|
+| 200 | OK | Request berhasil |
+| 201 | Created | Data berhasil dibuat |
+| 401 | Unauthorized | Belum login |
+| 403 | Forbidden | Sudah login tapi tidak punya akses |
+| 404 | Not Found | Data tidak ditemukan |
+| 422 | Unprocessable Entity | Validasi gagal |
+| 500 | Internal Server Error | Ada error di server |
